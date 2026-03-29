@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.GymClass>
+
+@{
+    ViewData["Title"] = "Gymklasser";
+}
+
+<h2>Gymklasser</h2>
+<a asp-action="Create" class="btn btn-primary mb-3">+ Lägg till klass</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Namn</th>
+            <th>Datum & Tid</th>
+            <th>Instruktör</th>
+            <th>Kategori</th>
+            <th>Max platser</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.DateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@item.Instructor</td>
+                <td>@item.Category</td>
+                <td>@item.MaxCapacity</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Redigera</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Ta bort</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

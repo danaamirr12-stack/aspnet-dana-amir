@@ -1,0 +1,36 @@
+﻿@model CoreFitness.Web.ViewModels.GymClassViewModel
+
+@{
+    ViewData["Title"] = "Skapa klass";
+}
+
+<h2>Skapa ny gymklass</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DateTime" class="form-label"></label>
+        <input asp-for="DateTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="DateTime" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Instructor" class="form-label"></label>
+        <input asp-for="Instructor" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="MaxCapacity" class="form-label"></label>
+        <input asp-for="MaxCapacity" class="form-control" />
+        <span asp-validation-for="MaxCapacity" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Spara</button>
+    <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+</form>

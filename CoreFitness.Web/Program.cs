@@ -1,5 +1,7 @@
+using CoreFitness.Application.Interfaces;
 using CoreFitness.Infrastructure.Data;
 using CoreFitness.Infrastructure.Identity;
+using CoreFitness.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IGymClassRepository, GymClassRepository>();
 
 builder.Services.AddControllersWithViews();
 
