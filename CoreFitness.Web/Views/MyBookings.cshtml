@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.Booking>
+@{
+    ViewData["Title"] = "Mina bokningar";
+}
+<h2>Mina bokningar</h2>
+
+@if (!Model.Any())
+{
+    <p>Du har inga aktiva bokningar.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Klass</th>
+                <th>Datum & Tid</th>
+                <th>Bokad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.GymClass?.Name</td>
+                    <td>@booking.GymClass?.DateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@booking.BookedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>
+                        <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="gymClassId" value="@booking.GymClassId" />
+                            <button type="submit" class="btn btn-sm btn-danger">Avboka</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

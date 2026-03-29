@@ -16,6 +16,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IGymClassRepository, GymClassRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
 builder.Services.AddControllersWithViews();
 
