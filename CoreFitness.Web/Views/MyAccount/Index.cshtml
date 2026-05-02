@@ -1,0 +1,125 @@
+﻿@model CoreFitness.Application.DTOs.UserProfileDto
+@{
+    ViewData["Title"] = "My Account - About Me";
+}
+
+<link rel="stylesheet" href="~/css/myaccount.css" />
+
+<section class="ma-page">
+    <h1 class="ma-title">My Account</h1>
+
+    <div class="ma-layout">
+
+        <div class="ma-sidebar">
+            <div class="ma-profile-img">
+                @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                {
+                    <img src="@Model.ProfileImagePath" alt="Profile" />
+                }
+                else
+                {
+                    <img src="~/images/default-profile.png" alt="Profile" />
+                }
+            </div>
+
+            <div class="ma-menu">
+                <div class="ma-menu-header">Menu Options</div>
+                <a asp-controller="MyAccount" asp-action="Index" class="ma-menu-item active">
+                    About Me <span>›</span>
+                </a>
+                <a asp-controller="MyAccount" asp-action="Membership" class="ma-menu-item">
+                    My Membership <span>›</span>
+                </a>
+                <a asp-controller="Booking" asp-action="MyBookings" class="ma-menu-item">
+                    My Bookings <span>›</span>
+                </a>
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="ma-menu-item ma-menu-btn">
+                        Sign Out <span>›</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="ma-remove-area">
+                <p>If you'd like to cancel your account click below</p>
+                <form asp-controller="MyAccount" asp-action="RemoveAccount" method="post">
+                    <button type="submit" class="ma-remove-btn">Remove Account</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="ma-content">
+            <div class="ma-card">
+                <h2>About Me</h2>
+
+                @if (TempData["Success"] != null)
+                {
+                    <div class="ma-success">@TempData["Success"]</div>
+                }
+
+                <form asp-controller="MyAccount" asp-action="Index" method="post" enctype="multipart/form-data">
+                    <div class="ma-field">
+                        <label>First Name</label>
+                        <input asp-for="FirstName" placeholder="Enter First Name" />
+                    </div>
+                    <div class="ma-field">
+                        <label>Last Name</label>
+                        <input asp-for="LastName" placeholder="Enter Last Name" />
+                    </div>
+                    <div class="ma-field">
+                        <label>Email Address *</label>
+                        <input asp-for="Email" placeholder="username@domain.com" readonly />
+                    </div>
+                    <div class="ma-field">
+                        <label>Phone Number</label>
+                        <input asp-for="Phone" placeholder="Enter Phone Number" />
+                    </div>
+                    <div class="ma-field">
+                        <label>Profile Image</label>
+                        <div class="ma-file-row">
+                            <input type="text" placeholder="Upload Profile Image" readonly class="ma-file-text" />
+                            <label class="ma-browse-btn">
+                                Browse
+                                <input type="file" name="profileImage" hidden />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ma-save-row">
+                        <button type="submit" class="ma-save-btn">Save ›</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="ma-card ma-stats">
+                <h2>My Statistics</h2>
+                <div class="ma-stat-item">
+                    <div class="ma-stat-row">
+                        <span>Check-In (last 30 days)</span>
+                        <span>25</span>
+                    </div>
+                    <div class="ma-progress">
+                        <div class="ma-progress-bar" style="width: 83%"></div>
+                    </div>
+                </div>
+                <div class="ma-stat-item">
+                    <div class="ma-stat-row">
+                        <span>Weight Goal</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="ma-progress">
+                        <div class="ma-progress-bar" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="ma-stat-item">
+                    <div class="ma-stat-row">
+                        <span>Current BMI</span>
+                        <span>27</span>
+                    </div>
+                    <div class="ma-progress">
+                        <div class="ma-progress-bar" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

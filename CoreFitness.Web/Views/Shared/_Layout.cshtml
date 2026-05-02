@@ -3,48 +3,106 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CoreFitness.Web</title>
+    <title>@ViewData["Title"] - CoreFitness</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CoreFitness.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CoreFitness.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg cf-navbar">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logotype.png" alt="CoreFitness" height="36" />
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav mx-auto gap-3">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link cf-nav-link" asp-controller="Home" asp-action="Index">Fitness Centers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link cf-nav-link" asp-controller="Memberships" asp-action="Index">Memberships</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link cf-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Training</a>
+                            <ul class="dropdown-menu cf-dropdown">
+                                <li><a class="dropdown-item" asp-controller="GymClasses" asp-action="Index">Personal Training</a></li>
+                                <li><a class="dropdown-item" asp-controller="GymClasses" asp-action="Index">Group Training</a></li>
+                                <li><a class="dropdown-item" href="#">Padel</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="GymClasses" asp-action="Index">Gymklasser</a>
+                            <a class="nav-link cf-nav-link" asp-controller="CustomerService" asp-action="Index">Customer Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cf-nav-link" href="#">Store</a>
                         </li>
                     </ul>
+
+                    <div class="d-flex align-items-center gap-3">
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <a class="nav-link cf-nav-link" asp-controller="GymClasses" asp-action="Index">Our Classes</a>
+                            <a class="btn cf-btn-primary" asp-controller="MyAccount" asp-action="Index">My Account →</a>
+                        }
+                        else
+                        {
+                            <a class="cf-nav-link" asp-controller="Account" asp-action="Register">Become Member</a>
+                            <a class="btn cf-btn-primary" asp-controller="Account" asp-action="Login">Sign In →</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - CoreFitness.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="cf-footer">
+        <div class="cf-footer-inner">
+            <div class="cf-footer-row1">
+                <div class="cf-footer-logo-area">
+                    <img src="~/images/logotype.png" alt="CoreFitness" height="32" />
+                </div>
+                <div class="cf-footer-tagline-area">
+                    <p class="cf-footer-tagline">Empowering Your Fitness Journey with Expert Training and Lasting Results</p>
+                </div>
+            </div>
+
+            <div class="cf-footer-divider-yellow"></div>
+
+            <div class="cf-footer-row2">
+                <div class="cf-footer-left">
+                    <p class="cf-footer-label">Our Location</p>
+                    <p class="cf-footer-text mt-2">Our supportive and knowledgeable trainers work with member to provide encouragement.</p>
+                    <p class="cf-footer-text mt-2">2nd Floor, Wellness Center, Centralvägen 10, Stockholm</p>
+                </div>
+                <div class="cf-footer-right">
+                    <div>
+                        <p class="cf-footer-label">Working Hours</p>
+                        <p class="cf-footer-text">Mon – Fri: 06:00 – 22:00<br />Saturday: 08:00 – 20:00</p>
+                    </div>
+                    <div>
+                        <p class="cf-footer-label">Opening Hours</p>
+                        <p class="cf-footer-text">Mon – Sun: 04:00 – 23:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cf-footer-divider-yellow"></div>
+            <p class="cf-footer-copy">© 2026 Core Fitness Group, All Rights Reserved.</p>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -16,12 +16,15 @@ namespace CoreFitness.Web.Controllers
             _repository = repository;
         }
 
+        
         public async Task<IActionResult> Index()
         {
             var classes = await _repository.GetAllAsync();
             return View(classes);
         }
 
+        
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -29,6 +32,7 @@ namespace CoreFitness.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(GymClassViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -47,6 +51,7 @@ namespace CoreFitness.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var gymClass = await _repository.GetByIdAsync(id);
@@ -67,6 +72,7 @@ namespace CoreFitness.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(GymClassViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -86,6 +92,7 @@ namespace CoreFitness.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var gymClass = await _repository.GetByIdAsync(id);
@@ -95,6 +102,7 @@ namespace CoreFitness.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _repository.DeleteAsync(id);

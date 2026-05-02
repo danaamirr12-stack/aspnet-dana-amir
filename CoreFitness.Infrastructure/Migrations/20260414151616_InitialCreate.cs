@@ -1,14 +1,14 @@
-﻿
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace CoreFitness.Infrastructure.Migrations
 {
-    /// <inheritdoc />
-    public partial class Init : Migration
+    
+    public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
+        
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -51,21 +51,6 @@ namespace CoreFitness.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bookings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GymClassId = table.Column<int>(type: "int", nullable: false),
-                    BookedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bookings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -147,8 +132,8 @@ namespace CoreFitness.Infrastructure.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -192,8 +177,8 @@ namespace CoreFitness.Infrastructure.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -203,6 +188,27 @@ namespace CoreFitness.Infrastructure.Migrations
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bookings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GymClassId = table.Column<int>(type: "int", nullable: false),
+                    BookedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bookings_GymClasses_GymClassId",
+                        column: x => x.GymClassId,
+                        principalTable: "GymClasses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -245,9 +251,14 @@ namespace CoreFitness.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_GymClassId",
+                table: "Bookings",
+                column: "GymClassId");
         }
 
-        /// <inheritdoc />
+        
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -269,9 +280,6 @@ namespace CoreFitness.Infrastructure.Migrations
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "GymClasses");
-
-            migrationBuilder.DropTable(
                 name: "Memberships");
 
             migrationBuilder.DropTable(
@@ -279,6 +287,9 @@ namespace CoreFitness.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "GymClasses");
         }
     }
 }

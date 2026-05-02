@@ -9,23 +9,23 @@
     <div class="auth-box">
 
         <h2>Become a Member</h2>
-        <p>Sign up to access all fitness tools, track your membership, and connect with the community that supports your goals.</p>
+        <p>Sign up to continue your fitness journey with full access to your customized program, training history, and progress tracking. Stay consistent, monitor your development, and keep moving forward with the structure and support built into your account.</p>
 
         <div class="auth-social">
             <a href="#">G</a>
             <a href="#">f</a>
-            <a href="#">in</a>
+            <a href="#">⌥</a>
         </div>
 
         <div class="auth-divider">
             <hr />
-            <span>OR USE EMAIL</span>
+            <span>OR CONTINUE WITH</span>
             <hr />
         </div>
 
         <form asp-action="Register" method="post">
 
-            @if (!ViewData.ModelState.IsValid)
+            @if (ViewContext.HttpContext.Request.Method == "POST" && !ViewData.ModelState.IsValid)
             {
                 <div class="auth-errors">
                     <span asp-validation-summary="ModelOnly"></span>
@@ -34,33 +34,30 @@
 
             <div class="auth-field">
                 <label asp-for="Email">Email Address *</label>
-                <input asp-for="Email" placeholder="Enter your email" />
+                <input asp-for="Email" placeholder="Enter Email Address" />
                 <span asp-validation-for="Email" class="error-text"></span>
             </div>
 
             <div class="auth-field">
                 <label asp-for="Password">Password</label>
-                <input asp-for="Password" placeholder="Enter your password" />
+                <input asp-for="Password" placeholder="Enter Password" />
                 <span asp-validation-for="Password" class="error-text"></span>
             </div>
 
             <div class="auth-field">
                 <label asp-for="ConfirmPassword">Confirm Password</label>
-                <input asp-for="ConfirmPassword" placeholder="Repeat your password" />
+                <input asp-for="ConfirmPassword" placeholder="Repeat Password" />
                 <span asp-validation-for="ConfirmPassword" class="error-text"></span>
             </div>
 
             <button type="submit" class="auth-btn">
-                Continue <span>→</span>
+                Continue <span>›</span>
             </button>
+
         </form>
 
         <p class="auth-note">
-            We will send a verification email to your address.
-        </p>
-
-        <p class="auth-switch">
-            Already a member? <a asp-action="Login">Sign In</a>
+            We will send a verification code to your email address.
         </p>
 
     </div>

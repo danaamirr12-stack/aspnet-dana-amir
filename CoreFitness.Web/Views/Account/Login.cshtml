@@ -9,54 +9,55 @@
     <div class="auth-box">
 
         <h2>Welcome Back!</h2>
-        <p>Your personalized training hub awaits. Log in to track your workouts and stay on top of your progress.</p>
+        <p>Log in to continue your fitness journey with full access to your customized program, training history, and progress tracking. Stay consistent, monitor your development, and keep moving forward with the structure and support built into your account.</p>
 
         <div class="auth-social">
             <a href="#">G</a>
             <a href="#">f</a>
-            <a href="#">in</a>
+            <a href="#">⌥</a>
         </div>
 
         <div class="auth-divider">
             <hr />
-            <span>OR USE EMAIL</span>
+            <span>OR CONTINUE WITH</span>
             <hr />
         </div>
 
         <form asp-action="Login" method="post">
             <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 
-            @if (!ViewData.ModelState.IsValid)
+            @if (ViewContext.HttpContext.Request.Method == "POST" && !ViewData.ModelState.IsValid)
             {
                 <div class="auth-errors">
-                    <span asp-validation-summary="ModelOnly"></span>
+                    <span asp-validation-summary="All"></span>
                 </div>
             }
 
             <div class="auth-field">
                 <label asp-for="Email">Email Address *</label>
-                <input asp-for="Email" placeholder="Enter your email" />
+                <input asp-for="Email" placeholder="Enter Email Address" />
                 <span asp-validation-for="Email" class="error-text"></span>
             </div>
 
             <div class="auth-field">
-                <label asp-for="Password">Password</label>
-                <input asp-for="Password" placeholder="Enter your password" />
+                <div class="auth-password-row">
+                    <label asp-for="Password">Password</label>
+                    <a href="#" class="auth-forgot">Forgot your password?</a>
+                </div>
+                <input asp-for="Password" placeholder="Enter Password" />
                 <span asp-validation-for="Password" class="error-text"></span>
             </div>
 
             <button type="submit" class="auth-btn">
-                Continue <span>→</span>
+                Continue <span>›</span>
             </button>
+
+            <div class="auth-terms">
+                <input type="checkbox" id="terms" />
+                <label for="terms">Accept user terms and conditions</label>
+            </div>
+
         </form>
-
-        <p class="auth-note">
-            By continuing you accept our <a href="#">terms and conditions</a>
-        </p>
-
-        <p class="auth-switch">
-            Don't have an account? <a asp-action="Register">Sign Up</a>
-        </p>
 
     </div>
 </div>

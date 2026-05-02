@@ -1,0 +1,159 @@
+﻿@model CoreFitness.Application.DTOs.ContactFormDto
+@{
+    ViewData["Title"] = "Customer Service";
+}
+
+<link rel="stylesheet" href="~/css/customerservice.css" />
+
+<section class="cs-hero-title">
+    <h1>Customer Service</h1>
+</section>
+
+<section class="cs-contact-section">
+    <div class="cs-contact-inner">
+        <div class="cs-image-block">
+            <img src="~/images/customerservice-woman.png" alt="Gym woman" />
+            <div class="cs-image-overlay">
+                <div class="cs-overlay-item">
+                    <span class="cs-overlay-icon">📞</span>
+                    <div>
+                        <small>Phone Number</small>
+                        <p>+(46) 8 410 521 00</p>
+                    </div>
+                </div>
+                <div class="cs-overlay-item">
+                    <span class="cs-overlay-icon">✉</span>
+                    <div>
+                        <small>Email Address</small>
+                        <p>info@corefitness.se</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-form-block">
+            <h2>Contact Us Today</h2>
+            <p>Ready to begin your fitness journey? Contact GymPro today and let our expert trainers guide you with the right program and support.</p>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="cs-success">@TempData["Success"]</div>
+            }
+
+            <form asp-controller="CustomerService" asp-action="Index" method="post">
+                <div class="cs-form-row">
+                    <div class="cs-form-group">
+                        <label>First Name *</label>
+                        <input asp-for="FirstName" placeholder="Enter First Name" />
+                    </div>
+                    <div class="cs-form-group">
+                        <label>Last Name *</label>
+                        <input asp-for="LastName" placeholder="Enter Last Name" />
+                    </div>
+                </div>
+                <div class="cs-form-row">
+                    <div class="cs-form-group">
+                        <label>Email Address *</label>
+                        <input asp-for="Email" placeholder="Enter Email Address" />
+                    </div>
+                    <div class="cs-form-group">
+                        <label>Phone Number</label>
+                        <input asp-for="Phone" placeholder="Enter Phone Number" />
+                    </div>
+                </div>
+                <div class="cs-form-group">
+                    <label>Message *</label>
+                    <textarea asp-for="Message" placeholder="Message..." rows="5"></textarea>
+                </div>
+                <button type="submit" class="cs-submit-btn">Submit Message →</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="cs-faq-section">
+    <div class="cs-faq-inner">
+        <div class="cs-faq-image">
+            <img src="~/images/customerservice-man.png" alt="Gym man" />
+        </div>
+        <div class="cs-faq-content">
+            <span class="cs-faq-tag">★ Frequently Asked Questions</span>
+            <h2>Common questions about gym and training</h2>
+
+            <div class="cs-accordion">
+
+                <div class="cs-accordion-item active">
+                    <button class="cs-accordion-btn">
+                        Q1. Do I need prior gym experience to Join CoreFitness?
+                        <span class="cs-arrow">▲</span>
+                    </button>
+                    <div class="cs-accordion-body">
+                        <p>No, GymPro is designed for all fitness levels. Our trainers guide beginners with proper techniques and structured workout plans to help them start safely and confidently.</p>
+                        <ul>
+                            <li>Every new member receives a personalized introduction to equipments</li>
+                            <li>Workouts are designed to grow with you, ensuring beginners can start safely.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cs-accordion-item">
+                    <button class="cs-accordion-btn">
+                        Q2. What facilities are included with the membership?
+                        <span class="cs-arrow">▼</span>
+                    </button>
+                    <div class="cs-accordion-body">
+                        <p>All memberships include access to our full gym floor, locker rooms, showers, and group classes. Premium plans also include sauna and personal trainer sessions.</p>
+                    </div>
+                </div>
+
+                <div class="cs-accordion-item">
+                    <button class="cs-accordion-btn">
+                        Q3. Can I try the gym before taking a membership?
+                        <span class="cs-arrow">▼</span>
+                    </button>
+                    <div class="cs-accordion-body">
+                        <p>Yes, we offer a free one-day trial pass. Visit any of our locations and bring valid ID to get started.</p>
+                    </div>
+                </div>
+
+                <div class="cs-accordion-item">
+                    <button class="cs-accordion-btn">
+                        Q4. Are there group workout programs available?
+                        <span class="cs-arrow">▼</span>
+                    </button>
+                    <div class="cs-accordion-body">
+                        <p>We run daily group sessions including HIIT, yoga, spinning, and strength training. Check our schedule for times.</p>
+                    </div>
+                </div>
+
+                <div class="cs-accordion-item">
+                    <button class="cs-accordion-btn">
+                        Q5. Is nutrition guidance included in the plans?
+                        <span class="cs-arrow">▼</span>
+                    </button>
+                    <div class="cs-accordion-body">
+                        <p>Premium and Elite members get access to our nutrition specialists for meal planning and dietary advice tailored to your fitness goals.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.querySelectorAll('.cs-accordion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.cs-accordion-item');
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.cs-accordion-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.cs-arrow').textContent = '▼';
+            });
+            if (!isActive) {
+                item.classList.add('active');
+                btn.querySelector('.cs-arrow').textContent = '▲';
+            }
+        });
+    });
+</script>

@@ -18,7 +18,7 @@ namespace CoreFitness.Web.Controllers
             _signInManager = signInManager;
         }
 
-        // Visa login-sidan
+        
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
@@ -26,7 +26,7 @@ namespace CoreFitness.Web.Controllers
             return View();
         }
 
-        // Hantera login-formuläret
+        
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
@@ -47,14 +47,14 @@ namespace CoreFitness.Web.Controllers
             return View(model);
         }
 
-        // Visa register-sidan
+        
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // Hantera register-formuläret
+        
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -81,7 +81,7 @@ namespace CoreFitness.Web.Controllers
             return View(model);
         }
 
-        // Logga ut
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -90,7 +90,7 @@ namespace CoreFitness.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // Hjälpmetod – skicka tillbaka rätt sida efter login
+        
         private IActionResult RedirectToLocal(string? returnUrl)
         {
             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))

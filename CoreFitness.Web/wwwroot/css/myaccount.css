@@ -1,0 +1,376 @@
+﻿.ma-page {
+    background: #f5f5f5;
+    min-height: 100vh;
+    padding: 40px 60px 80px;
+}
+
+.ma-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 32px;
+}
+
+.ma-layout {
+    display: flex;
+    gap: 28px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+
+.ma-sidebar {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.ma-profile-img {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+    .ma-profile-img img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        border-radius: 12px;
+    }
+
+.ma-menu {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.ma-menu-header {
+    background: #c8f000;
+    color: #111;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 12px 16px;
+}
+
+.ma-menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 16px;
+    font-size: 0.85rem;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+
+    .ma-menu-item:last-child {
+        border-bottom: none;
+    }
+
+    .ma-menu-item:hover {
+        background: #f9f9f9;
+    }
+
+    .ma-menu-item.active {
+        color: #a0c800;
+        font-weight: 600;
+    }
+
+.ma-menu-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+}
+
+.ma-remove-area {
+    text-align: center;
+    padding: 8px 0;
+}
+
+    .ma-remove-area p {
+        font-size: 0.72rem;
+        color: #888;
+        margin-bottom: 6px;
+        line-height: 1.4;
+    }
+
+.ma-remove-btn {
+    background: none;
+    border: none;
+    color: #e53e3e;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+.ma-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.ma-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+    .ma-card h2 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #111;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+.ma-field {
+    margin-bottom: 16px;
+}
+
+    .ma-field label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+    }
+
+    .ma-field input {
+        width: 100%;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.88rem;
+        color: #333;
+        outline: none;
+        background: #fafafa;
+        transition: border-color 0.2s;
+    }
+
+        .ma-field input:focus {
+            border-color: #c8f000;
+            background: #fff;
+        }
+
+        .ma-field input[readonly] {
+            background: #f0f0f0;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+.ma-file-row {
+    display: flex;
+    gap: 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fafafa;
+}
+
+.ma-file-text {
+    flex: 1;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+.ma-browse-btn {
+    background: #e5e5e5;
+    color: #333;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+    .ma-browse-btn:hover {
+        background: #d5d5d5;
+    }
+
+.ma-save-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.ma-save-btn {
+    background: #c8f000;
+    color: #111;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 28px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .ma-save-btn:hover {
+        background: #b0d800;
+    }
+
+.ma-success {
+    background: #e8ffb0;
+    border: 1px solid #c8f000;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    color: #3a5c00;
+}
+
+
+.ma-stats h2 {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+.ma-stat-item {
+    margin-bottom: 20px;
+}
+
+.ma-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.ma-progress {
+    background: #f0f0f0;
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.ma-progress-bar {
+    background: #c8f000;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.mem-status-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mem-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+    .mem-status-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+.mem-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.mem-value {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.mem-badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.mem-active {
+    background: #e8ffb0;
+    color: #3a5c00;
+}
+
+.mem-inactive {
+    background: #ffe0e0;
+    color: #c00;
+}
+
+.mem-none {
+    font-size: 0.88rem;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.mem-plans {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mem-plan-btn {
+    width: 100%;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .mem-plan-btn:hover {
+        background: #f0f0f0;
+    }
+
+.mem-plan-featured {
+    background: #1a1a2e;
+    border: none;
+}
+
+    .mem-plan-featured:hover {
+        background: #2a2a3e;
+    }
+
+    .mem-plan-featured .mem-plan-name,
+    .mem-plan-featured .mem-plan-price {
+        color: #fff;
+    }
+
+.mem-plan-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.mem-plan-price {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #c8f000;
+}

@@ -1,0 +1,100 @@
+﻿@model CoreFitness.Domain.Entities.Membership?
+@{
+    ViewData["Title"] = "My Membership";
+}
+
+<link rel="stylesheet" href="~/css/myaccount.css" />
+
+<section class="ma-page">
+    <h1 class="ma-title">My Account</h1>
+
+    <div class="ma-layout">
+
+        
+        <div class="ma-sidebar">
+            <div class="ma-profile-img">
+                <img src="~/images/default-profile.png" alt="Profile" />
+            </div>
+
+            <div class="ma-menu">
+                <div class="ma-menu-header">Menu Options</div>
+                <a asp-controller="MyAccount" asp-action="Index" class="ma-menu-item">
+                    About Me <span>›</span>
+                </a>
+                <a asp-controller="MyAccount" asp-action="Membership" class="ma-menu-item active">
+                    My Membership <span>›</span>
+                </a>
+                <a asp-controller="Booking" asp-action="MyBookings" class="ma-menu-item">
+                    My Bookings <span>›</span>
+                </a>
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="ma-menu-item ma-menu-btn">
+                        Sign Out <span>›</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="ma-remove-area">
+                <p>If you'd like to cancel your account click below</p>
+                <form asp-controller="MyAccount" asp-action="RemoveAccount" method="post">
+                    <button type="submit" class="ma-remove-btn">Remove Account</button>
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="ma-content">
+            <div class="ma-card">
+                <h2>My Membership</h2>
+
+                @if (Model != null)
+                {
+                    <div class="mem-status-card">
+                        <div class="mem-status-row">
+                            <span class="mem-label">Membership Type</span>
+                            <span class="mem-value">@Model.Type</span>
+                        </div>
+                        <div class="mem-status-row">
+                            <span class="mem-label">Start Date</span>
+                            <span class="mem-value">@Model.StartDate.ToString("dd MMM yyyy")</span>
+                        </div>
+                        <div class="mem-status-row">
+                            <span class="mem-label">Status</span>
+                            <span class="mem-badge @(Model.IsActive ? "mem-active" : "mem-inactive")">
+                                @(Model.IsActive ? "Active" : "Inactive")
+                            </span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p class="mem-none">You don't have an active membership yet. Choose a plan below.</p>
+
+                    <div class="mem-plans">
+                        <form asp-controller="MyAccount" asp-action="CreateMembership" method="post">
+                            <input type="hidden" name="type" value="Basic" />
+                            <button type="submit" class="mem-plan-btn">
+                                <span class="mem-plan-name">Basic</span>
+                                <span class="mem-plan-price">199 kr / month</span>
+                            </button>
+                        </form>
+                        <form asp-controller="MyAccount" asp-action="CreateMembership" method="post">
+                            <input type="hidden" name="type" value="Premium" />
+                            <button type="submit" class="mem-plan-btn mem-plan-featured">
+                                <span class="mem-plan-name">Premium</span>
+                                <span class="mem-plan-price">349 kr / month</span>
+                            </button>
+                        </form>
+                        <form asp-controller="MyAccount" asp-action="CreateMembership" method="post">
+                            <input type="hidden" name="type" value="Elite" />
+                            <button type="submit" class="mem-plan-btn">
+                                <span class="mem-plan-name">Elite</span>
+                                <span class="mem-plan-price">549 kr / month</span>
+                            </button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

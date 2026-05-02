@@ -2,8 +2,14 @@
 @{
     ViewData["Title"] = "Gymklasser";
 }
+
 <h2>Gymklasser</h2>
-<a asp-action="Create" class="btn btn-primary mb-3">+ Lägg till klass</a>
+
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" class="btn btn-primary mb-3">+ Lägg till klass</a>
+}
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -16,22 +22,26 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var gymClass in Model)
         {
             <tr>
-                <td>@item.Name</td>
-                <td>@item.DateTime.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>@item.Instructor</td>
-                <td>@item.Category</td>
-                <td>@item.MaxCapacity</td>
+                <td>@gymClass.Name</td>
+                <td>@gymClass.DateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@gymClass.Instructor</td>
+                <td>@gymClass.Category</td>
+                <td>@gymClass.MaxCapacity</td>
                 <td>
                     <form asp-controller="Booking" asp-action="Book" method="post" style="display:inline">
                         @Html.AntiForgeryToken()
-                        <input type="hidden" name="gymClassId" value="@item.Id" />
+                        <input type="hidden" name="gymClassId" value="@gymClass.Id" />
                         <button type="submit" class="btn btn-sm btn-success">Boka</button>
                     </form>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Redigera</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Ta bort</a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@gymClass.Id" class="btn btn-sm btn-warning">Redigera</a>
+                        <a asp-action="Delete" asp-route-id="@gymClass.Id" class="btn btn-sm btn-danger">Ta bort</a>
+                    }
                 </td>
             </tr>
         }
